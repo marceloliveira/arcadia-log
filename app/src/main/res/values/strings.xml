@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Arcadia Log</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="base_campaign">Arcadia Quest</string>
+    <string name="beyond_the_grave_campaign">Beyond The Grave</string>
+    <string name="the_nameless_campaign">The Nameless Campaign</string>
+    <string name="current_campaigns">Current Campaigns</string>
+    <string name="finished_campaigns">Finished Campaigns</string>
+    <string name="settings">Settings</string>
+    <string name="no_campaign_selected">No Campaign selected.</string>
+    <string name="guild_eagle">Eagles</string>
+    <string name="guild_fox">Foxes</string>
+    <string name="guild_lion">Lions</string>
+    <string name="guild_panda">Pandas</string>
+    <string name="guild_crow">Crows</string>
+    <string name="guild_shark">Sharks</string>
+    <string name="guild_snake">Snakes</string>
+    <string name="guild_tiger">Tigers</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
+    <string name="campaign_type">Campaign</string>
+    <string name="fall_of_arcadia_campaign">Fall of Arcadia</string>
+    <string name="pets_campaign">Pets</string>
+    <string name="inferno_campaign">Inferno</string>
+    <string name="diva_hero">Diva</string>
+    <string name="greensleeves_hero">Greensleeves</string>
+    <string name="grom_hero">Grom</string>
+    <string name="hobsbawm_hero">Hobsbawm</string>
+    <string name="kanga_hero">Kanga</string>
+    <string name="johan_hero">Johan</string>
+    <string name="maya_hero">Maya</string>
+    <string name="scarlet_hero">Scarlet</string>
+    <string name="seth_hero">Seth</string>
+    <string name="spike_hero">Spike</string>
+    <string name="wisp_hero">Wisp</string>
+    <string name="zazu_hero">Zazu</string>
+    <string name="district_of_hammers_scenario">District of Hammers</string>
+    <string name="brightsun_arena_scenario">Brightsun Arena</string>
+    <string name="the_moon_gate_scenario">The Moon Gate</string>
+    <string name="the_rookery_scenario">The Rookery</string>
+    <string name="the_manor_scenario">The Manor</string>
+    <string name="the_orcs_hive_scenario">The Orc\'s Hive</string>
+    <string name="alchemists_district_scenario">Alchemist\'s District</string>
+    <string name="the_university_plaza_scenario">The University Plaza</string>
+    <string name="red_dawn_square_scenario">Red Dawn Square</string>
+    <string name="evershadow_district_scenario">Evershadow District</string>
+    <string name="the_temple_of_dawning_twilight_scenario">The Temple of Dawning Twilight</string>
+    <string name="haunted_barracks_scenario">Haunted Barracks</string>
+    <string name="slaughterhouse_scenario">Slaughterhouse</string>
+    <string name="crypts_scenario">Crypts</string>
+    <string name="bridge_of_the_damned_scenario">Bridge of the Damned</string>
+    <string name="the_graveyard_scenario">The Graveyard</string>
+    <string name="black_shrine_scenario">Black Shrine</string>
+    <string name="mill_of_souls_scenario">Mill of Souls</string>
+    <string name="secret_laboratory_scenario">Secret Laboratory</string>
+    <string name="the_unholy_mausoleum_scenario">The Unholy Mausoleum</string>
+</resources>

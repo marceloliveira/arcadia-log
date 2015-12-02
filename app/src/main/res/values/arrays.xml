@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="campaign_array">
+        <item>@string/base_campaign</item>
+        <item>@string/beyond_the_grave_campaign</item>
+        <item>@string/the_nameless_campaign</item>
+        <item>@string/inferno_campaign</item>
+        <item>@string/pets_campaign</item>
+        <item>@string/fall_of_arcadia_campaign</item>
+    </string-array>
+    <string-array name="guild_array">
+        <item>@string/guild_eagle</item>
+        <item>@string/guild_fox</item>
+        <item>@string/guild_lion</item>
+        <item>@string/guild_panda</item>
+        <item>@string/guild_crow</item>
+        <item>@string/guild_shark</item>
+        <item>@string/guild_snake</item>
+        <item>@string/guild_tiger</item>
+    </string-array>
+    <string-array name="hero_array">
+        <item>@string/diva_hero</item>
+        <item>@string/greensleeves_hero</item>
+        <item>@string/grom_hero</item>
+        <item>@string/hobsbawm_hero</item>
+        <item>@string/kanga_hero</item>
+        <item>@string/johan_hero</item>
+        <item>@string/maya_hero</item>
+        <item>@string/scarlet_hero</item>
+        <item>@string/seth_hero</item>
+        <item>@string/spike_hero</item>
+        <item>@string/wisp_hero</item>
+        <item>@string/zazu_hero</item>
+    </string-array>
+    <string-array name="base_inner_scenario_array">
+        <item>@string/district_of_hammers_scenario</item>
+        <item>@string/brightsun_arena_scenario</item>
+        <item>@string/the_moon_gate_scenario</item>
+        <item>@string/the_rookery_scenario</item>
+        <item>@string/the_manor_scenario</item>
+        <item>@string/the_orcs_hive_scenario</item>
+    </string-array>
+    <string-array name="base_outer_scenario_array">
+        <item>@string/alchemists_district_scenario</item>
+        <item>@string/the_university_plaza_scenario</item>
+        <item>@string/red_dawn_square_scenario</item>
+        <item>@string/evershadow_district_scenario</item>
+    </string-array>
+    <string-array name="base_final_scenario_array">
+        <item>@string/the_temple_of_dawning_twilight_scenario</item>
+    </string-array>
+    <string-array name="beyond_the_grave_inner_scenario_array">
+        <item>@string/haunted_barracks_scenario</item>
+        <item>@string/slaughterhouse_scenario</item>
+        <item>@string/crypts_scenario</item>
+        <item>@string/bridge_of_the_damned_scenario</item>
+        <item>@string/the_graveyard_scenario</item>
+    </string-array>
+    <string-array name="beyond_the_grave_outer_scenario_array">
+        <item>@string/black_shrine_scenario</item>
+        <item>@string/mill_of_souls_scenario</item>
+        <item>@string/secret_laboratory_scenario</item>
+    </string-array>
+    <string-array name="beyond_the_grave_final_scenario_array">
+        <item>@string/the_unholy_mausoleum_scenario</item>
+    </string-array>
+</resources>
