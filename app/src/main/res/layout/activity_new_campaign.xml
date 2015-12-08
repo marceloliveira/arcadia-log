@@ -9,133 +9,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.attalaya.arcadialog.activity.NewCampaignActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_weight="1"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:footerDividersEnabled="true"
+        />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:text="@string/cancel"
+            android:id="@+id/cancelNewCampaignButton" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/campaign_type"
-                android:id="@+id/campaignTypeText" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/campaignTypeSpinner" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <AutoCompleteTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Player 1"
-                android:ems="10"
-                android:id="@+id/player1" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/guildSpinner1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <AutoCompleteTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Player 2"
-                android:ems="10"
-                android:id="@+id/player2" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/guildSpinner2" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <AutoCompleteTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Player 3"
-                android:ems="10"
-                android:id="@+id/player3" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/guildSpinner3" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <AutoCompleteTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Player 4"
-                android:ems="10"
-                android:id="@+id/player4" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/guildSpinner4" />
-        </LinearLayout>
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="50dp" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="end">
+            android:text="@string/addPlayer"
+            android:id="@+id/addPlayer" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"
-                android:id="@+id/cancelNewCampaignButton" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:id="@+id/createCampaignButton" />
-        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:id="@+id/createCampaignButton" />
     </LinearLayout>
+
 </RelativeLayout>

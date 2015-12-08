@@ -8,7 +8,7 @@
 
     <string name="base_campaign">Arcadia Quest</string>
     <string name="beyond_the_grave_campaign">Beyond The Grave</string>
-    <string name="the_nameless_campaign">The Nameless Campaign</string>
+    <string name="the_nameless_campaign">The Nameless</string>
     <string name="current_campaigns">Current Campaigns</string>
     <string name="finished_campaigns">Finished Campaigns</string>
     <string name="settings">Settings</string>
@@ -59,4 +59,8 @@
     <string name="mill_of_souls_scenario">Mill of Souls</string>
     <string name="secret_laboratory_scenario">Secret Laboratory</string>
     <string name="the_unholy_mausoleum_scenario">The Unholy Mausoleum</string>
+    <string name="addPlayer">Add Player</string>
+    <string name="select_guild">Select Guild...</string>
+    <string name="title_activity_campaign">CampaignActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

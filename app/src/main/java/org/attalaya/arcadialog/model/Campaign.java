@@ -6,23 +6,10 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by Marcel on 28/11/2015.
- */
 public class Campaign extends RealmObject{
 
-    @PrimaryKey
-    private int id;
     private int campaign;
     private RealmList<CampaignPlayer> players;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getCampaign() {
         return campaign;
@@ -39,5 +26,4 @@ public class Campaign extends RealmObject{
     public void setPlayers(RealmList<CampaignPlayer> players) {
         this.players = players;
     }
-
 }
