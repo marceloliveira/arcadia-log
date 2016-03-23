@@ -60,7 +60,7 @@ public class CampaignActivity extends AppCompatActivity implements ViewPager.OnP
         controller = ArcadiaController.getInstance(this);
         campaign = controller.getCampaign(getIntent().getIntExtra("campaignId",0));
         tabColors = new int[campaign.getPlayers().size()+1];
-        tabColors[0] = getResources().getColor(R.color.colorAccent);
+        tabColors[0] = getResources().getColor(R.color.colorPrimaryLight);
         for (int i = 0; i < campaign.getPlayers().size(); i++) {
             tabColors[i+1] = getResources().getIntArray(R.array.guild_colors_array)[campaign.getPlayers().get(i).getGuild()];
         }
@@ -117,7 +117,10 @@ public class CampaignActivity extends AppCompatActivity implements ViewPager.OnP
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         int colorFrom = tabColors[position];
-        int colorTo = position>tabColors.length?tabColors[position]:tabColors[position+1];
+        int colorTo = colorFrom;
+        if (position<tabColors.length-1) {
+            colorTo = tabColors[position+1];
+        }
         findViewById(R.id.pager_title_strip).setBackgroundColor((int) new ArgbEvaluator().evaluate(positionOffset,colorFrom,colorTo));
     }
 
