@@ -1,22 +1,32 @@
 package org.attalaya.arcadialog.model;
 
-import java.util.ArrayList;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class Campaign extends RealmObject{
 
-    private int campaign;
-    private RealmList<CampaignPlayer> players;
+    @PrimaryKey
+    private int campaignId;
 
-    public int getCampaign() {
-        return campaign;
+    private CampaignType campaignType;
+    private RealmList<CampaignPlayer> players;
+    private RealmList<CampaignScenario> scenarios;
+
+    public int getCampaignId() {
+        return campaignId;
     }
 
-    public void setCampaign(int campaign) {
-        this.campaign = campaign;
+    public void setCampaignId(int campaignId) {
+        this.campaignId = campaignId;
+    }
+
+    public CampaignType getCampaignType() {
+        return campaignType;
+    }
+
+    public void setCampaignType(CampaignType campaignType) {
+        this.campaignType = campaignType;
     }
 
     public RealmList<CampaignPlayer> getPlayers() {
@@ -25,5 +35,13 @@ public class Campaign extends RealmObject{
 
     public void setPlayers(RealmList<CampaignPlayer> players) {
         this.players = players;
+    }
+
+    public RealmList<CampaignScenario> getScenarios() {
+        return scenarios;
+    }
+
+    public void setScenarios(RealmList<CampaignScenario> scenarios) {
+        this.scenarios = scenarios;
     }
 }

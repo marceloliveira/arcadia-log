@@ -42,7 +42,7 @@
         <item>@string/wisp_hero</item>
         <item>@string/zazu_hero</item>
     </string-array>
-    <string-array name="base_inner_scenario_array">
+    <string-array name="base_outer_scenario_array">
         <item>@string/district_of_hammers_scenario</item>
         <item>@string/brightsun_arena_scenario</item>
         <item>@string/the_moon_gate_scenario</item>
@@ -50,7 +50,7 @@
         <item>@string/the_manor_scenario</item>
         <item>@string/the_orcs_hive_scenario</item>
     </string-array>
-    <string-array name="base_outer_scenario_array">
+    <string-array name="base_inner_scenario_array">
         <item>@string/alchemists_district_scenario</item>
         <item>@string/the_university_plaza_scenario</item>
         <item>@string/red_dawn_square_scenario</item>

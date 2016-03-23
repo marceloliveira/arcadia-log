@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ import org.attalaya.arcadialog.model.PlayerHero;
 import io.realm.RealmBaseAdapter;
 
 public class CampaignListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
     private ArcadiaController controller;
 
@@ -41,34 +42,38 @@ public class CampaignListActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         ListView campaignList = (ListView) findViewById(R.id.campaignListView);
+        campaignList.setOnItemClickListener(this);
+        campaignList.setOnItemLongClickListener(this);
         campaignList.setAdapter(new RealmBaseAdapter<Campaign>(this, controller.getCampaigns(), true) {
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
+                int n = 0;
                 Campaign campaign = realmResults.get(i);
-                LinearLayout layout = new LinearLayout(this.context);
+                LinearLayout layout = view==null?new LinearLayout(this.context):(LinearLayout)view;
                 layout.setPadding(16, 16, 16, 16);
                 layout.setOrientation(LinearLayout.VERTICAL);
-                TextView campaignType = new TextView(this.context);
+                TextView campaignType = view==null?new TextView(this.context):(TextView)layout.getChildAt(n++);
                 campaignType.setTextAppearance(this.context, android.R.style.TextAppearance_DeviceDefault_Large);
-                campaignType.setText(getResources().getStringArray(R.array.campaign_array)[campaign.getCampaign()]);
-                layout.addView(campaignType);
-                for (CampaignPlayer p: campaign.getPlayers()) {
-                    TextView player = new TextView(this.context);
-                    player.setText(p.getPlayer().getName());
+                campaignType.setText(campaign.getCampaignType().getName());
+                if (view==null) layout.addView(campaignType);
+                for (CampaignPlayer campaignPlayer: campaign.getPlayers()) {
+                    TextView player = view==null?new TextView(this.context):(TextView)layout.getChildAt(n++);
+                    player.setText(campaignPlayer.getPlayer().getName());
                     player.setTextAppearance(this.context, android.R.style.TextAppearance_DeviceDefault_Medium);
-                    player.setTextColor(getResources().getIntArray(R.array.guild_colors_array)[p.getGuild()]);
-                    layout.addView(player);
-                    TextView heroes = new TextView(this.context);
+                    player.setTextColor(getResources().getIntArray(R.array.guild_colors_array)[campaignPlayer.getGuild()]);
+                    if (view==null) layout.addView(player);
+                    TextView heroes = view==null?new TextView(this.context):(TextView)layout.getChildAt(n++);
                     String heroList = "";
-                    for (PlayerHero hero: p.getHeroes()) {
+                    for (PlayerHero hero: campaignPlayer.getHeroes()) {
                         if (!heroList.equals("")) {
                             heroList += ", ";
                         }
-                        heroList += getResources().getStringArray(R.array.hero_array)[hero.getHero()];
+                        heroList += hero.getHero().getName();
                     }
                     heroes.setText(heroList);
-                    layout.addView(heroes);
+                    if (view==null) layout.addView(heroes);
                 }
+                layout.setTag(campaign);
                 return layout;
             }
         });
@@ -143,5 +148,17 @@ public class CampaignListActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        return false;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this, CampaignActivity.class);
+        intent.putExtra("campaignId",((Campaign)view.getTag()).getCampaignId());
+        startActivity(intent);
     }
 }

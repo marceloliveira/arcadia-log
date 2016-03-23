@@ -1,7 +1,14 @@
 package org.attalaya.arcadialog.activity;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.animation.AnimatorCompatHelper;
+import android.support.v4.animation.AnimatorUpdateListenerCompat;
+import android.support.v4.animation.ValueAnimatorCompat;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,8 +26,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.attalaya.arcadialog.R;
+import org.attalaya.arcadialog.controller.ArcadiaController;
+import org.attalaya.arcadialog.model.Campaign;
+import org.attalaya.arcadialog.model.CampaignPlayer;
 
-public class CampaignActivity extends AppCompatActivity {
+import layout.CampaignScenarioFragment;
+
+public class CampaignActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+
+    private Campaign campaign;
+    private ArcadiaController controller;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -30,7 +45,7 @@ public class CampaignActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private CampaignSectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -42,16 +57,25 @@ public class CampaignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign);
 
+        controller = ArcadiaController.getInstance(this);
+        campaign = controller.getCampaign(getIntent().getIntExtra("campaignId",0));
+        tabColors = new int[campaign.getPlayers().size()+1];
+        tabColors[0] = getResources().getColor(R.color.colorAccent);
+        for (int i = 0; i < campaign.getPlayers().size(); i++) {
+            tabColors[i+1] = getResources().getIntArray(R.array.guild_colors_array)[campaign.getPlayers().get(i).getGuild()];
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new CampaignSectionsPagerAdapter(getSupportFragmentManager(), campaign);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(this);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -88,6 +112,25 @@ public class CampaignActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int[] tabColors;
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        int colorFrom = tabColors[position];
+        int colorTo = position>tabColors.length?tabColors[position]:tabColors[position+1];
+        findViewById(R.id.pager_title_strip).setBackgroundColor((int) new ArgbEvaluator().evaluate(positionOffset,colorFrom,colorTo));
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -118,7 +161,7 @@ public class CampaignActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_campaign, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(((CampaignActivity)getActivity()).mSectionsPagerAdapter.getPageTitle(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -127,36 +170,42 @@ public class CampaignActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class CampaignSectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private Campaign campaign;
+
+        public CampaignSectionsPagerAdapter(FragmentManager fm, Campaign campaign) {
             super(fm);
+            this.campaign = campaign;
         }
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return CampaignScenarioFragment.newInstance(campaign.getCampaignId());
+                default:
+                    return PlaceholderFragment.newInstance(position);
+            }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return campaign.getPlayers().size()+1;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
+            if (position>=getCount()) return null;
             switch (position) {
                 case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
+                    return campaign.getCampaignType().getName();
+                default:
+                    return campaign.getPlayers().get(position-1).getPlayer().getName();
             }
-            return null;
         }
     }
 }

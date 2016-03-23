@@ -1,65 +1,46 @@
 package org.attalaya.arcadialog.model;
 
-import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
- * Created by Marcel on 01/12/2015.
+ * Created by Marcel on 12/12/2015.
  */
-public class Scenario extends RealmObject {
+public class Scenario extends RealmObject{
 
-    private int scenario;
-    private CampaignPlayer winner;
-    private RealmList<CampaignPlayer> leastDeaths;
-    private RealmList<CampaignPlayer> mostCoins;
-    private RealmList<CampaignPlayer> reward;
-    private CampaignPlayer title;
+    private String name;
+    private CampaignType campaignType;
+    private int position;
+    private int difficulty;
 
-    public int getScenario() {
-        return scenario;
+    public CampaignType getCampaignType() {
+        return campaignType;
     }
 
-    public void setScenario(int scenario) {
-        this.scenario = scenario;
+    public void setCampaignType(CampaignType campaignType) {
+        this.campaignType = campaignType;
     }
 
-    public CampaignPlayer getWinner() {
-        return winner;
+    public String getName() {
+        return name;
     }
 
-    public void setWinner(CampaignPlayer winner) {
-        this.winner = winner;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public RealmList<CampaignPlayer> getLeastDeaths() {
-        return leastDeaths;
+    public int getPosition() {
+        return position;
     }
 
-    public void setLeastDeaths(RealmList<CampaignPlayer> leastDeaths) {
-        this.leastDeaths = leastDeaths;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
-    public RealmList<CampaignPlayer> getMostCoins() {
-        return mostCoins;
+    public int getDifficulty() {
+        return difficulty;
     }
 
-    public void setMostCoins(RealmList<CampaignPlayer> mostCoins) {
-        this.mostCoins = mostCoins;
-    }
-
-    public RealmList<CampaignPlayer> getReward() {
-        return reward;
-    }
-
-    public void setReward(RealmList<CampaignPlayer> reward) {
-        this.reward = reward;
-    }
-
-    public CampaignPlayer getTitle() {
-        return title;
-    }
-
-    public void setTitle(CampaignPlayer title) {
-        this.title = title;
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }

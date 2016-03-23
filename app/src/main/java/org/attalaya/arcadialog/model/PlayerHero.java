@@ -8,15 +8,15 @@ import io.realm.RealmObject;
  */
 public class PlayerHero extends RealmObject {
 
-    private int hero;
+    private Hero hero;
     private RealmList<Item> items;
     private int curse;
 
-    public int getHero() {
+    public Hero getHero() {
         return hero;
     }
 
-    public void setHero(int hero) {
+    public void setHero(Hero hero) {
         this.hero = hero;
     }
 
