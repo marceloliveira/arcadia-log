@@ -12,10 +12,10 @@ import org.attalaya.arcadialog.model.Player;
 import org.attalaya.arcadialog.model.Scenario;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -28,7 +28,8 @@ public class ArcadiaController {
 
     public ArcadiaController(Context context) {
         this.context = context;
-        this.realm = Realm.getInstance(this.context);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this.context).build();
+        this.realm = Realm.getInstance(realmConfiguration);
         if (this.realm.isEmpty()) {
             populateRealm();
         }
@@ -46,7 +47,7 @@ public class ArcadiaController {
             h.setName(name);
             realm.copyToRealm(h);
         }
-        CampaignType ct = realm.allObjects(CampaignType.class).first();
+        CampaignType ct = realm.where(CampaignType.class).findFirst();
         for (String name: context.getResources().getStringArray(R.array.base_outer_scenario_array)) {
             Scenario s = new Scenario();
             s.setName(name);
@@ -80,33 +81,33 @@ public class ArcadiaController {
 
     public List<String> getPlayerNames() {
         ArrayList<String> playerNames = new ArrayList<>();
-        RealmResults<Player> result = realm.allObjects(Player.class);
+        RealmResults<Player> result = realm.where(Player.class).findAll();
         for (Player p: result) {
             playerNames.add(p.getName());
         }
         return playerNames;
     }
 
-    public Campaign getCampaign(int campaignId) {
-        return realm.allObjects(Campaign.class).where().equalTo("campaignId",campaignId).findFirst();
+    public Campaign getCampaign(long campaignId) {
+        return realm.where(Campaign.class).equalTo("campaignId",campaignId).findFirst();
     }
 
     public RealmResults<Campaign> getCampaigns() {
-        return realm.allObjects(Campaign.class);
+        return realm.where(Campaign.class).findAll();
     }
 
     public void createCampaign(List<CampaignPlayer> players, CampaignType campaignType) {
         realm.beginTransaction();
         RealmList<CampaignPlayer> campaignPlayers = new RealmList<>();
         for (CampaignPlayer p: players) {
-            RealmQuery<Player> player = realm.allObjects(Player.class).where().equalTo("name", p.getPlayer().getName());
+            RealmQuery<Player> player = realm.where(Player.class).equalTo("name", p.getPlayer().getName());
             if (player.count() > 0) {
                 p.setPlayer(player.findFirst());
             }
             campaignPlayers.add(p);
         }
         Campaign campaign = new Campaign();
-        campaign.setCampaignId(realm.allObjects(Campaign.class).size());
+        campaign.setCampaignId(realm.where(Campaign.class).count());
         campaign.setCampaignType(campaignType);
         campaign.setPlayers(campaignPlayers);
         realm.copyToRealm(campaign);
@@ -124,7 +125,7 @@ public class ArcadiaController {
     }
 
     public RealmResults<CampaignType> getCampaignTypes() {
-        return realm.allObjects(CampaignType.class);
+        return realm.where(CampaignType.class).findAll();
     }
 
     public RealmResults<Scenario> getScenarios(Campaign campaign) {
@@ -136,7 +137,7 @@ public class ArcadiaController {
         } else if (q>2) {
             position = 1;
         }
-        RealmQuery<Scenario> scenarios = realm.allObjects(Scenario.class).where().equalTo("position",position).equalTo("campaignType.name", ct.getName());
+        RealmQuery<Scenario> scenarios = realm.where(Scenario.class).equalTo("position",position).equalTo("campaignType.name", ct.getName());
         for (CampaignScenario cs: campaign.getScenarios()) {
             scenarios = scenarios.notEqualTo("name",cs.getScenario().getName());
         }
@@ -148,6 +149,17 @@ public class ArcadiaController {
     }
 
     public RealmResults<Hero> getHeroes() {
-        return realm.allObjects(Hero.class);
+        return realm.where(Hero.class).findAll();
+    }
+
+    public void editCampaignScenario(CampaignScenario campaignScenario, CampaignPlayer winner, RealmList<CampaignPlayer> deaths, RealmList<CampaignPlayer> coins, RealmList<CampaignPlayer> reward, RealmList<CampaignPlayer> title) {
+        realm.beginTransaction();
+        campaignScenario.setWinner(winner);
+        campaignScenario.setLeastDeaths(deaths);
+        campaignScenario.setMostCoins(coins);
+        campaignScenario.setReward(reward);
+        campaignScenario.setTitle(title);
+        realm.copyToRealmOrUpdate(campaignScenario);
+        realm.commitTransaction();
     }
 }

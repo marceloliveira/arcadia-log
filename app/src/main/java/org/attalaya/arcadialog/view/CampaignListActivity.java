@@ -1,4 +1,4 @@
-package org.attalaya.arcadialog.activity;
+package org.attalaya.arcadialog.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,11 +44,11 @@ public class CampaignListActivity extends AppCompatActivity
         ListView campaignList = (ListView) findViewById(R.id.campaignListView);
         campaignList.setOnItemClickListener(this);
         campaignList.setOnItemLongClickListener(this);
-        campaignList.setAdapter(new RealmBaseAdapter<Campaign>(this, controller.getCampaigns(), true) {
+        campaignList.setAdapter(new RealmBaseAdapter<Campaign>(this, controller.getCampaigns()) {
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
                 int n = 0;
-                Campaign campaign = realmResults.get(i);
+                Campaign campaign = adapterData.get(i);
                 LinearLayout layout = view==null?new LinearLayout(this.context):(LinearLayout)view;
                 layout.setPadding(16, 16, 16, 16);
                 layout.setOrientation(LinearLayout.VERTICAL);

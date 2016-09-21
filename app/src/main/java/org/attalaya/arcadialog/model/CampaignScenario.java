@@ -2,11 +2,15 @@ package org.attalaya.arcadialog.model;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Marcel on 01/12/2015.
  */
 public class CampaignScenario extends RealmObject {
+
+    @PrimaryKey
+    private long campaignScenarioId;
 
     private int order;
     private Scenario scenario;
@@ -15,6 +19,14 @@ public class CampaignScenario extends RealmObject {
     private RealmList<CampaignPlayer> mostCoins;
     private RealmList<CampaignPlayer> reward;
     private RealmList<CampaignPlayer> title;
+
+    public long getCampaignScenarioId() {
+        return campaignScenarioId;
+    }
+
+    public void setCampaignScenarioId(long campaignScenarioId) {
+        this.campaignScenarioId = campaignScenarioId;
+    }
 
     public int getOrder() {
         return order;

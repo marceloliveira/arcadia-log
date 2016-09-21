@@ -7,9 +7,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".ArcadiaApplication">
         <activity
-            android:name=".activity.CampaignListActivity"
+            android:name=".view.CampaignListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,20 +20,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.NewCampaignActivity"
-            android:parentActivityName=".activity.CampaignListActivity">
+            android:name=".view.NewCampaignActivity"
+            android:parentActivityName=".view.CampaignListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.CampaignListActivity" />
+                android:value=".view.CampaignListActivity" />
         </activity>
         <activity
-            android:name=".activity.CampaignActivity"
+            android:name=".view.CampaignActivity"
             android:label="@string/title_activity_campaign"
-            android:parentActivityName=".activity.CampaignListActivity"
+            android:parentActivityName=".view.CampaignListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.attalaya.arcadialog.activity.CampaignListActivity" />
+                android:value="org.attalaya.arcadialog.view.CampaignListActivity" />
+        </activity>
+        <activity
+            android:name=".view.EditScenarioActivity"
+            android:parentActivityName=".view.CampaignActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.attalaya.arcadialog.view.CampaignActivity" />
         </activity>
     </application>
 

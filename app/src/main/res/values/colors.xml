@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLight">#7986CB</color>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF5252</color>
+    <color name="colorPrimaryLight">#64B5F6</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#B2FF59</color>
 
-    <color name="colorEagleGuild">#1976D2</color>
+    <color name="colorEagleGuild">#303F9F</color>
     <color name="colorFoxGuild">#D32F2F</color>
     <color name="colorLionGuild">#F57C00</color>
     <color name="colorPandaGuild">#388E3C</color>
 
     <color name="colorCrowGuild">#616161</color>
-    <color name="colorSharkGuild">#0288D1</color>
+    <color name="colorSharkGuild">#0097A7</color>
     <color name="colorSnakeGuild">#7B1FA2</color>
     <color name="colorTigerGuild">#FFEB3B</color>
+
 </resources>

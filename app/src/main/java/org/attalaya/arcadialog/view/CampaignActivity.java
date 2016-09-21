@@ -1,14 +1,8 @@
-package org.attalaya.arcadialog.activity;
+package org.attalaya.arcadialog.view;
 
 import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
-import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.animation.AnimatorCompatHelper;
-import android.support.v4.animation.AnimatorUpdateListenerCompat;
-import android.support.v4.animation.ValueAnimatorCompat;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -28,9 +22,6 @@ import android.widget.TextView;
 import org.attalaya.arcadialog.R;
 import org.attalaya.arcadialog.controller.ArcadiaController;
 import org.attalaya.arcadialog.model.Campaign;
-import org.attalaya.arcadialog.model.CampaignPlayer;
-
-import layout.CampaignScenarioFragment;
 
 public class CampaignActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -58,7 +49,7 @@ public class CampaignActivity extends AppCompatActivity implements ViewPager.OnP
         setContentView(R.layout.activity_campaign);
 
         controller = ArcadiaController.getInstance(this);
-        campaign = controller.getCampaign(getIntent().getIntExtra("campaignId",0));
+        campaign = controller.getCampaign(getIntent().getLongExtra("campaignId",0));
         tabColors = new int[campaign.getPlayers().size()+1];
         tabColors[0] = getResources().getColor(R.color.colorPrimaryLight);
         for (int i = 0; i < campaign.getPlayers().size(); i++) {

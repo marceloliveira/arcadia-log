@@ -1,9 +1,8 @@
-package org.attalaya.arcadialog.activity;
+package org.attalaya.arcadialog.view;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -30,12 +28,8 @@ import org.attalaya.arcadialog.model.PlayerHero;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.zip.Inflater;
 
 import io.realm.RealmBaseAdapter;
 import io.realm.RealmList;
@@ -105,14 +99,14 @@ public class NewCampaignActivity extends AppCompatActivity implements View.OnCli
         playerArrayAdapter = new CampaignPlayerAdapter(this, players);
         list.setAdapter(playerArrayAdapter);
 
-        ((Spinner) findViewById(R.id.campaignTypeSpinner)).setAdapter(new RealmBaseAdapter<CampaignType>(this, controller.getCampaignTypes(), true) {
+        ((Spinner) findViewById(R.id.campaignTypeSpinner)).setAdapter(new RealmBaseAdapter<CampaignType>(this, controller.getCampaignTypes()) {
 
             @Override
             public View getDropDownView(int i, View view, ViewGroup viewGroup) {
                 if (view==null) {
                     view = View.inflate(context, android.R.layout.simple_spinner_dropdown_item, null);
                 }
-                ((TextView)view).setText(realmResults.get(i).getName());
+                ((TextView)view).setText(adapterData.get(i).getName());
                 view.setPadding(16,16,16,16);
                 return view;
             }
@@ -122,7 +116,7 @@ public class NewCampaignActivity extends AppCompatActivity implements View.OnCli
                 if (view==null) {
                     view = View.inflate(context, android.R.layout.simple_spinner_dropdown_item, null);
                 }
-                ((TextView)view).setText(realmResults.get(i).getName());
+                ((TextView)view).setText(adapterData.get(i).getName());
                 view.setPadding(16, 16, 16, 16);
                 return view;
             }
@@ -215,7 +209,7 @@ public class NewCampaignActivity extends AppCompatActivity implements View.OnCli
                     }
                 };
                 guildTypeArray.add(getString(R.string.select_guild));
-                guildTypeArray.addAll(getResources().getStringArray(R.array.guild_array));
+                guildTypeArray.addAll(getResources().getStringArray(R.array.guild_name_array));
                 ((Spinner) dialog.findViewById(R.id.guildSpinner)).setAdapter(guildTypeArray);
 
                 Spinner hero1 = (Spinner) dialog.findViewById(R.id.heroSpinner1);

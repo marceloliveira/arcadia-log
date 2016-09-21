@@ -1,7 +1,8 @@
-package layout;
+package org.attalaya.arcadialog.view;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -23,7 +24,7 @@ public class CampaignScenarioFragment extends Fragment implements View.OnClickLi
 
     private static final String ARG_CAMPAIGN_ID = "campaign_id";
 
-    private int mCampaignId;
+    private long mCampaignId;
     private ArcadiaController controller;
     private Button newScenario;
     private AlertDialog dialog;
@@ -33,10 +34,10 @@ public class CampaignScenarioFragment extends Fragment implements View.OnClickLi
     public CampaignScenarioFragment() {
     }
 
-    public static CampaignScenarioFragment newInstance(int campaignId) {
+    public static CampaignScenarioFragment newInstance(long campaignId) {
         CampaignScenarioFragment fragment = new CampaignScenarioFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_CAMPAIGN_ID, campaignId);
+        args.putLong(ARG_CAMPAIGN_ID, campaignId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,7 +46,7 @@ public class CampaignScenarioFragment extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mCampaignId = getArguments().getInt(ARG_CAMPAIGN_ID);
+            mCampaignId = getArguments().getLong(ARG_CAMPAIGN_ID);
             controller = ArcadiaController.getInstance(getActivity());
         }
     }
@@ -64,7 +65,7 @@ public class CampaignScenarioFragment extends Fragment implements View.OnClickLi
                 if (convertView==null) convertView = getActivity().getLayoutInflater().inflate(R.layout.campaign_scenario_list_item,null);
                 CampaignScenario s = getItem(position);
                 ((TextView)convertView.findViewById(R.id.scenarioName)).setText(s.getScenario().getName());
-                ((TextView)convertView.findViewById(R.id.winnerName)).setText(s.getWinner()==null?"-":s.getWinner().getPlayer().getName());
+                ((TextView)convertView.findViewById(R.id.winnerName)).setText(s.getWinner()==null?"Winner":s.getWinner().getPlayer().getName());
                 return convertView;
             }
         };
@@ -110,7 +111,9 @@ public class CampaignScenarioFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        getFragmentManager().beginTransaction().add(EditScenarioFragment.newInstance(mCampaignId,i),"EditScenario").commit();
-        getFragmentManager().executePendingTransactions();
+        Intent intent = new Intent(this.getActivity(), EditScenarioActivity.class);
+        intent.putExtra("campaignId",mCampaignId);
+        intent.putExtra("campaignScenarioId",i);
+        startActivity(intent);
     }
 }

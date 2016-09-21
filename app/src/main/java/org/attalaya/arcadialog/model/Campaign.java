@@ -7,17 +7,17 @@ import io.realm.annotations.PrimaryKey;
 public class Campaign extends RealmObject{
 
     @PrimaryKey
-    private int campaignId;
+    private long campaignId;
 
     private CampaignType campaignType;
     private RealmList<CampaignPlayer> players;
     private RealmList<CampaignScenario> scenarios;
 
-    public int getCampaignId() {
+    public long getCampaignId() {
         return campaignId;
     }
 
-    public void setCampaignId(int campaignId) {
+    public void setCampaignId(long campaignId) {
         this.campaignId = campaignId;
     }
 

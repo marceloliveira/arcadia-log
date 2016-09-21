@@ -18,6 +18,16 @@
         <item>@string/guild_snake</item>
         <item>@string/guild_tiger</item>
     </string-array>
+    <string-array name="guild_name_array">
+        <item>@string/guild_name_eagle</item>
+        <item>@string/guild_name_fox</item>
+        <item>@string/guild_name_lion</item>
+        <item>@string/guild_name_panda</item>
+        <item>@string/guild_name_crow</item>
+        <item>@string/guild_name_shark</item>
+        <item>@string/guild_name_snake</item>
+        <item>@string/guild_name_tiger</item>
+    </string-array>
     <integer-array name="guild_colors_array">
         <item>@color/colorEagleGuild</item>
         <item>@color/colorFoxGuild</item>
