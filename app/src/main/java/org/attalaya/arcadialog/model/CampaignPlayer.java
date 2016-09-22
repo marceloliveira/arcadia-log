@@ -2,11 +2,15 @@ package org.attalaya.arcadialog.model;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Marcel on 28/11/2015.
  */
 public class CampaignPlayer extends RealmObject {
+
+    @PrimaryKey
+    private long id;
 
     private int guild;
     private Player player;
@@ -44,4 +48,13 @@ public class CampaignPlayer extends RealmObject {
     public void setSavedCoin(boolean savedCoin) {
         this.savedCoin = savedCoin;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 }

@@ -68,7 +68,7 @@ public class EditScenarioActivity extends AppCompatActivity implements CompoundB
                                         "color",
                                         this.getPackageName())));
             }
-            if (mCampaignScenario.getWinner().equals(campaignPlayer)) {
+            if (mCampaignScenario.getWinner()!=null && mCampaignScenario.getWinner().equals(campaignPlayer)) {
                 r.setChecked(true);
             }
             mWinnerRadio.add(r);

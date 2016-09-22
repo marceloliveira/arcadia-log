@@ -1,8 +1,6 @@
 package org.attalaya.arcadialog.view;
 
 import android.animation.ArgbEvaluator;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -67,16 +65,6 @@ public class CampaignActivity extends AppCompatActivity implements ViewPager.OnP
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
     }
 
@@ -179,9 +167,9 @@ public class CampaignActivity extends AppCompatActivity implements ViewPager.OnP
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return CampaignScenarioFragment.newInstance(campaign.getCampaignId());
+                    return CampaignScenarioFragment.newInstance(campaign.getId());
                 default:
-                    return PlaceholderFragment.newInstance(position);
+                    return CampaignPlayerFragment.newInstance(campaign.getId(),position-1);
             }
         }
 

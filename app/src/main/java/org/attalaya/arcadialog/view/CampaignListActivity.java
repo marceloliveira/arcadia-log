@@ -158,7 +158,7 @@ public class CampaignListActivity extends AppCompatActivity
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(this, CampaignActivity.class);
-        intent.putExtra("campaignId",((Campaign)view.getTag()).getCampaignId());
+        intent.putExtra("campaignId",((Campaign)view.getTag()).getId());
         startActivity(intent);
     }
 }

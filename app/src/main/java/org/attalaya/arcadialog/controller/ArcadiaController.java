@@ -8,9 +8,12 @@ import org.attalaya.arcadialog.model.CampaignPlayer;
 import org.attalaya.arcadialog.model.CampaignScenario;
 import org.attalaya.arcadialog.model.CampaignType;
 import org.attalaya.arcadialog.model.Hero;
+import org.attalaya.arcadialog.model.Item;
 import org.attalaya.arcadialog.model.Player;
+import org.attalaya.arcadialog.model.PlayerHero;
 import org.attalaya.arcadialog.model.Scenario;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +72,11 @@ public class ArcadiaController {
             s.setPosition(2);
             realm.copyToRealm(s);
         }
+        try {
+            realm.createAllFromJson(Item.class, context.getResources().openRawResource(R.raw.items));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         realm.commitTransaction();
     }
 
@@ -89,7 +97,7 @@ public class ArcadiaController {
     }
 
     public Campaign getCampaign(long campaignId) {
-        return realm.where(Campaign.class).equalTo("campaignId",campaignId).findFirst();
+        return realm.where(Campaign.class).equalTo("id",campaignId).findFirst();
     }
 
     public RealmResults<Campaign> getCampaigns() {
@@ -98,16 +106,25 @@ public class ArcadiaController {
 
     public void createCampaign(List<CampaignPlayer> players, CampaignType campaignType) {
         realm.beginTransaction();
+        long playerId = realm.where(Player.class).count();
+        long playerHeroId = realm.where(PlayerHero.class).count();
+        long campaignPlayerId = realm.where(CampaignPlayer.class).count();
         RealmList<CampaignPlayer> campaignPlayers = new RealmList<>();
         for (CampaignPlayer p: players) {
             RealmQuery<Player> player = realm.where(Player.class).equalTo("name", p.getPlayer().getName());
             if (player.count() > 0) {
                 p.setPlayer(player.findFirst());
+            } else {
+                p.getPlayer().setId(playerId++);
             }
+            for (PlayerHero h: p.getHeroes()) {
+                h.setId(playerHeroId++);
+            }
+            p.setId(campaignPlayerId++);
             campaignPlayers.add(p);
         }
         Campaign campaign = new Campaign();
-        campaign.setCampaignId(realm.where(Campaign.class).count());
+        campaign.setId(realm.where(Campaign.class).count());
         campaign.setCampaignType(campaignType);
         campaign.setPlayers(campaignPlayers);
         realm.copyToRealm(campaign);
@@ -160,6 +177,13 @@ public class ArcadiaController {
         campaignScenario.setReward(reward);
         campaignScenario.setTitle(title);
         realm.copyToRealmOrUpdate(campaignScenario);
+        realm.commitTransaction();
+    }
+
+    public void updateCampaignPlayerSavedCoin(CampaignPlayer campaignPlayer, boolean savedCoin) {
+        realm.beginTransaction();
+        campaignPlayer.setSavedCoin(savedCoin);
+        realm.copyToRealmOrUpdate(campaignPlayer);
         realm.commitTransaction();
     }
 }

@@ -10,7 +10,7 @@ import io.realm.annotations.PrimaryKey;
 public class CampaignScenario extends RealmObject {
 
     @PrimaryKey
-    private long campaignScenarioId;
+    private long id;
 
     private int order;
     private Scenario scenario;
@@ -20,12 +20,12 @@ public class CampaignScenario extends RealmObject {
     private RealmList<CampaignPlayer> reward;
     private RealmList<CampaignPlayer> title;
 
-    public long getCampaignScenarioId() {
-        return campaignScenarioId;
+    public long getId() {
+        return id;
     }
 
-    public void setCampaignScenarioId(long campaignScenarioId) {
-        this.campaignScenarioId = campaignScenarioId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public int getOrder() {

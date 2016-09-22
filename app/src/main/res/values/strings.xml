@@ -72,10 +72,6 @@
     <string name="addPlayer">Add Player</string>
     <string name="select_guild">Select Guild...</string>
     <string name="title_activity_campaign">CampaignActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_hero">Select Hero</string>
     <string name="addScenario">New Scenario</string>
     <string name="winner">Winner</string>
@@ -83,4 +79,5 @@
     <string name="mostCoins">Most Coins</string>
     <string name="reward">Reward</string>
     <string name="title">Title</string>
+    <string name="saved_coin">Saved coin?</string>
 </resources>
